@@ -1,4 +1,4 @@
-const dataForms = document.querySelectorAll('[data-form')
+const dataForms = document.querySelectorAll('[data-form]')
 
 dataForms.forEach(dataForm => {
     dataForm.addEventListener('click', () => {

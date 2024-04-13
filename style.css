@@ -689,6 +689,22 @@ label {
     rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
+.field textarea {
+  font-size: 16px;
+  line-height: 28px;
+  padding: 8px 16px;
+  width: 100%;
+  min-height: 44px;
+  border: unset;
+  border-radius: 4px;
+  outline-color: #6398e7;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
 input[type="submit"] {
   background-color: #4d89e3;
   /* box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
@@ -1263,6 +1279,10 @@ a.ssolink {
 :is(.present-rentData, .present-rentCars, .present-rentModels).active {
   right: 0;
   left: 0;
+}
+
+.present-rentData [data-service] {
+  display: none;
 }
 
 .cityRent {

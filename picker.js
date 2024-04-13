@@ -1,6 +1,6 @@
 new Picker(document.querySelector('.js-picker-from'), {
     date: new Date(),
-    format: 'DD:MM:YYYY',
+    format: 'DD.MM.YYYY, HH',
     rows: 5,
     headers: true,
     text: {
@@ -9,7 +9,8 @@ new Picker(document.querySelector('.js-picker-from'), {
         confirm: 'Выбрать',
         day: 'День',
         month: 'Месяц',
-        year: 'Год'
+        year: 'Год',
+        hour: 'Час'
     },
     months: [
         'Январь',
@@ -43,7 +44,7 @@ new Picker(document.querySelector('.js-picker-from'), {
 
 new Picker(document.querySelector('.js-picker-to'), {
     date: new Date(),
-    format: 'DD:MM:YYYY',
+    format: 'DD.MM.YYYY, HH',
     rows: 5,
     headers: true,
     text: {
@@ -52,7 +53,8 @@ new Picker(document.querySelector('.js-picker-to'), {
         confirm: 'Выбрать',
         day: 'День',
         month: 'Месяц',
-        year: 'Год'
+        year: 'Год',
+        hour: 'Час'
     },
     months: [
         'Январь',

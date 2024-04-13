@@ -284,19 +284,19 @@
 
             <div class="present-body">
                 <div class="servicesRent flex flex-col">
-                    <div class="item">
+                    <div class="item" data-service="cars">
                         <img src="car.svg" alt="form">
                         <span class="service">Легковые автомобили</span>
                     </div>
-                    <div class="item">
+                    <div class="item" data-service="gruz">
                         <img src="gruz.svg" alt="form">
                         <span class="service">Грузовые и спецтехника</span>
                     </div>
-                    <div class="item">
+                    <div class="item" data-service="instruments">
                         <img src="ob.svg" alt="form">
                         <span class="service">Оборудование и инструменты</span>
                     </div>
-                    <div class="item">
+                    <div class="item" data-service="otherServices">
                         <img src="services.svg" alt="form">
                         <span class="service">Услуги</span>
                     </div>
@@ -393,18 +393,33 @@
             </div>
 
             <div class="present-body">
-                <form id="form" action="">
-                    <div class="field padding-bottom--24">
-                        <label for="username">Марка машины</label>
-                        <input class="carInp" type="text" name="username" placeholder="Марка машины" id="carName"
-                            autocomplete="off">
-                        <div class="present-items"></div>
-                    </div>
-                    <div class="field padding-bottom--24 carModelField hide">
-                        <label for="username">Модель машины</label>
-                        <input class="carInp" type="text" name="username" placeholder="Модель машины" id="carModel"
-                            autocomplete="off">
-                    </div>
+                <form id="rentCarsForm" action="">
+                    <span data-service="cars">
+                        <div class="field padding-bottom--24">
+                            <label for="username">Марка машины</label>
+                            <input class="carInp" type="text" name="username" placeholder="Марка машины" id="carName"
+                                autocomplete="off">
+                        </div>
+                        <div class="field padding-bottom--24 carModelField hide">
+                            <label for="username">Модель машины</label>
+                            <input class="carInp" type="text" name="username" placeholder="Модель машины" id="carModel"
+                                autocomplete="off">
+                        </div>
+                    </span>
+                    <span data-service="gruz">
+                        <div class="field padding-bottom--24">
+                            <label for="username">Опишите вашу услугу</label>
+                            <textarea name="gruz" id="gruzTextarea" cols="30" rows="3"
+                                placeholder="Кран с грузоподьемностью 1 тонны..."></textarea>
+                        </div>
+                    </span>
+                    <span data-service="instruments">
+                        <div class="field padding-bottom--24">
+                            <label for="username">Опишите вашу услугу</label>
+                            <textarea name="instruments" id="instrumentsTextarea" cols="30" rows="3"
+                                placeholder="Вертолет..."></textarea>
+                        </div>
+                    </span>
 
                     <!-- 
                     <div class="field padding-bottom--24">
@@ -414,15 +429,16 @@
 
                     <div class="field padding-bottom--24">
                         <label>От</label>
-                        <input type="text" class="form-control js-picker-from" placeholder="dd:mm:yyyy" />
+                        <input id="fromDate" type="text" class="form-control js-picker-from"
+                            placeholder="dd.mm.yyyyy, HH"  />
                     </div>
                     <div class="field padding-bottom--24">
                         <label>До</label>
-                        <input type="text" class="form-control js-picker-to" placeholder="dd:mm:yyyy" />
+                        <input id="toDate" type="text" class="form-control js-picker-to" placeholder="dd.mm.yyyyy, HH" />
                     </div>
                     <div class="field padding-bottom--24">
                         <label for="username">Телефон</label>
-                        <input type="tel" name="phone" id="phone" placeholder="Введите номер телефона" required="">
+                        <input type="tel" name="phone" id="phone" placeholder="Введите номер телефона" required>
                     </div>
 
                     <div class="field padding-bottom--24">
@@ -431,6 +447,7 @@
                 </form>
             </div>
         </div>
+
         <div class="present-rentCars">
             <div class="tbar">
                 <div class="tbar-title">
