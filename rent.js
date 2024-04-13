@@ -16,6 +16,7 @@ rent.addEventListener('click', () => {
 })
 
 forrent.addEventListener('click', () => {
+    presentRent.classList.toggle('active')
     serviceStatus = 'Сдать под Аренду'
 })
 
@@ -39,14 +40,17 @@ rentCities.forEach(el => {
         if (rentService.id === 'cars') {
             tbarTitleRentData.textContent = 'Выберите машину'
             presentRentData.querySelector("[data-service='cars']").style.display = 'inline'
+            document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
         }
         if (rentService.id === 'gruz') {
             tbarTitleRentData.textContent = 'Грузовые и Спецтехника'
             presentRentData.querySelector("[data-service='gruz']").style.display = 'inline'
+            document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
         }
-        if (rentService.id === 'instruments') {
+        if (rentService.id === 'equipments') {
             tbarTitleRentData.textContent = 'Оборудование и инструменты'
-            presentRentData.querySelector("[data-service='instruments']").style.display = 'inline'
+            presentRentData.querySelector("[data-service='equipments']").style.display = 'inline'
+            document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
         }
         if (rentService.id === 'otherServices') {
             tbarTitleRentData.textContent = 'Услуги'
@@ -113,7 +117,7 @@ inputSearchCar.addEventListener('input', e => {
 })
 
 
-let carsModel = []
+let carModels = []
 const inputCarModel = document.querySelector('#carModel')
 inputCarModel.addEventListener('click', () => {
     presentCarModel.classList.toggle('active')
@@ -128,8 +132,8 @@ inputCarModel.addEventListener('click', () => {
         .then(data => {
             // Processing the fetched data
             console.log(data)
-            carsModel = data
-            carsModel.forEach(el => {
+            carModels = data
+            carModels.forEach(el => {
                 const listItem = document.createElement('div');
                 listItem.classList.add('item')
 
@@ -152,8 +156,8 @@ inputCarModel.addEventListener('click', () => {
         });
 })
 
-const rentCarsForm = document.querySelector('#rentCarsForm')
-rentCarsForm.addEventListener('submit', (e) => {
+const rentForm = document.querySelector('#rentForm')
+rentForm.addEventListener('submit', (e) => {
     e.preventDefault()
     sendMessage()
 })
@@ -161,34 +165,49 @@ rentCarsForm.addEventListener('submit', (e) => {
 const phone = document.querySelector('#phone')
 const fromDate = document.querySelector('#fromDate')
 const toDate = document.querySelector('#toDate')
+const gruzTextarea = document.querySelector('#gruzTextarea')
+const equipmentsTextarea = document.querySelector('#equipmentsTextarea')
 
 const sendMessage = () => {
-    let text
-    if (rentService.id === 'cars') {
-        text = `Данные с сайта: %0A<b>Статус:</b> <i>${serviceStatus}</i> %0A <b>Вид услуги:</b> <i>${rentService.name}</i>%0A <b>Город:</b> <i>${rentCity}</i>%0A Марка машины: ${inputCarName.value}%0A Модель машины: ${inputCarModel.value}%0A От: ${fromDate.value} %0A До: ${toDate.value} %0A Телефон: ${phone.value} `
-        document.querySelector(`[data-service=${rentService.id}`)
-    }
-
-    if (rentService.id === 'gruz') {
-        text = `Данные с сайта: %0A<b>Статус:</b> <i>${serviceStatus}</i> %0A <b>Вид услуги:</b> <i>${rentService.name}</i>%0A <b>Город:</b> <i>${rentCity}</i>%0A Описание услуги: ${inputCarName.value}%0A От: ${fromDate.value} %0A До: ${toDate.value} %0A Телефон: ${phone.value} `
-    }
-
-    if (rentService.id === 'instruments') {
-        text = `Данные с сайта: %0A<b>Статус:</b> <i>${serviceStatus}</i> %0A <b>Вид услуги:</b> <i>${rentService.name}</i>%0A <b>Город:</b> <i>${rentCity}</i>%0A Описание услуги: ${inputCarName.value}%0A От: ${fromDate.value} %0A До: ${toDate.value} %0A Телефон: ${phone.value} `
-    }
-
-    if (rentService.id === "otherServices") {
-        // const text = `Данные с сайта: %0A<b>Статус:</b> <i>${serviceStatus}</i> %0A <b>Вид услуги:</b> <i>${rentService.name}</i>%0A <b>Город:</b> <i>${rentCity}</i>%0A Марка машины: ${inputCarName.value}%0A Модель машины: ${inputCarModel.value}%0A От: ${fromDate.value} %0A До: ${toDate.value} %0A Телефон: ${phone.value} `
-    }
-
-    console.log(text);
 
     // const t = "6569603838:AAF_gfsCWK5fughj7bevQswTyn4ruxq1t8g"
     // const cid = -1002112977648
     // const url = `https://api.telegram.org/bot${t}/sendMessage?chat_id=${cid}&text=${text}&parse_mode=html`
 
-    const t = "6435795574:AAHDuWdPQpcNI3yPekGjbV1GRPU7SRFw4Q4"
-    const cid = -4135021717
+    let t
+    let cid
+
+    let text
+    if (rentService.id === 'cars') {
+        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> ${serviceStatus} %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Марка машины:</b> ${inputCarName.value}%0A<b>Модель машины:</b> ${inputCarModel.value}%0A<b>От:</b> ${fromDate.value} %0A<b>До:</b> ${toDate.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        t = "6435795574:AAHDuWdPQpcNI3yPekGjbV1GRPU7SRFw4Q4"
+        cid = -4135021717
+    }
+
+    if (rentService.id === 'gruz') {
+        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> ${serviceStatus} %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${gruzTextarea.value}%0A<b>От:</b> ${fromDate.value} %0A<b>До:</b> ${toDate.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        t = "7008339608:AAHqtjexxE5IIOPcWUmNIx0hew-Ujsow7tM"
+        cid = -4144342640
+    }
+
+    if (rentService.id === 'equipments') {
+        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> ${serviceStatus} %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>От:</b> ${fromDate.value} %0A<b>До:</b> ${toDate.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+
+        t = "7052202621:AAF7zSQ8VyoHvezFID4nGzckl-ffSgxzrNU"
+        cid = -4108676653
+    }
+
+    if (rentService.id === "otherServices") {
+        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> ${serviceStatus} %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>От:</b> ${fromDate.value} %0A<b>До:</b> ${toDate.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+
+
+        t = "6617014775:AAEGiauFSfXcmIw8u--oJTKbxelQf26tNpA"
+        cid = -4123367316
+    }
+
+    console.log(text);
+
+
     const url = `https://api.telegram.org/bot${t}/sendMessage?chat_id=${cid}&text=${text}&parse_mode=html`
 
     const xhr = new XMLHttpRequest();
@@ -210,6 +229,10 @@ const sendMessage = () => {
     // reset()
 }
 
+const reset = () => {
+    document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
+}
+
 
 const backFromRent = document.querySelector('.present-rent .back')
 backFromRent.addEventListener('click', () => {
@@ -224,6 +247,12 @@ const backFromRentData = document.querySelector('.present-rentData .back')
 backFromRentData.addEventListener('click', () => {
     presentRentData.classList.toggle('active')
     presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
+    document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = false)
+    document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
+    
+    carModels = []
+    carModelField.classList.toggle('hide')
+
 })
 
 const backFromRentCars = document.querySelector('.present-rentCars .back')

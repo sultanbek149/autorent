@@ -27,9 +27,7 @@
     <script defer src="
     https://cdn.jsdelivr.net/npm/pickerjs@1.2.1/dist/picker.min.js
     "></script>
-    <link href="
-    https://cdn.jsdelivr.net/npm/pickerjs@1.2.1/dist/picker.min.css
-    " rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/pickerjs@1.2.1/dist/picker.min.css" rel="stylesheet">
 
     <script defer src="picker.js"></script>
 
@@ -292,7 +290,7 @@
                         <img src="gruz.svg" alt="form">
                         <span class="service">Грузовые и спецтехника</span>
                     </div>
-                    <div class="item" data-service="instruments">
+                    <div class="item" data-service="equipments">
                         <img src="ob.svg" alt="form">
                         <span class="service">Оборудование и инструменты</span>
                     </div>
@@ -393,30 +391,30 @@
             </div>
 
             <div class="present-body">
-                <form id="rentCarsForm" action="">
+                <form id="rentForm" action="POST">
                     <span data-service="cars">
                         <div class="field padding-bottom--24">
                             <label for="username">Марка машины</label>
-                            <input class="carInp" type="text" name="username" placeholder="Марка машины" id="carName"
-                                autocomplete="off">
+                            <input class="serviceInp" type="text" name="username" placeholder="Марка машины"
+                                id="carName" autocomplete="off">
                         </div>
                         <div class="field padding-bottom--24 carModelField hide">
                             <label for="username">Модель машины</label>
-                            <input class="carInp" type="text" name="username" placeholder="Модель машины" id="carModel"
-                                autocomplete="off">
+                            <input class="serviceInp" type="text" name="username" placeholder="Модель машины"
+                                id="carModel" autocomplete="off">
                         </div>
                     </span>
                     <span data-service="gruz">
                         <div class="field padding-bottom--24">
                             <label for="username">Опишите вашу услугу</label>
-                            <textarea name="gruz" id="gruzTextarea" cols="30" rows="3"
+                            <textarea class="serviceInp" name="gruz" id="gruzTextarea" cols="30" rows="3"
                                 placeholder="Кран с грузоподьемностью 1 тонны..."></textarea>
                         </div>
                     </span>
-                    <span data-service="instruments">
+                    <span data-service="equipments">
                         <div class="field padding-bottom--24">
                             <label for="username">Опишите вашу услугу</label>
-                            <textarea name="instruments" id="instrumentsTextarea" cols="30" rows="3"
+                            <textarea class="serviceInp" name="equipments" id="equipmentsTextarea" cols="30" rows="3"
                                 placeholder="Вертолет..."></textarea>
                         </div>
                     </span>
@@ -429,16 +427,17 @@
 
                     <div class="field padding-bottom--24">
                         <label>От</label>
-                        <input id="fromDate" type="text" class="form-control js-picker-from"
-                            placeholder="dd.mm.yyyyy, HH"  />
+                        <input id="fromDate" type="text" class="serviceInp form-control js-picker-from"
+                            placeholder="dd.mm.yyyyy, HH" />
                     </div>
                     <div class="field padding-bottom--24">
                         <label>До</label>
-                        <input id="toDate" type="text" class="form-control js-picker-to" placeholder="dd.mm.yyyyy, HH" />
+                        <input id="toDate" type="text" class="serviceInp form-control js-picker-to"
+                            placeholder="dd.mm.yyyyy, HH" />
                     </div>
                     <div class="field padding-bottom--24">
                         <label for="username">Телефон</label>
-                        <input type="tel" name="phone" id="phone" placeholder="Введите номер телефона" required>
+                        <input class="serviceInp" type="tel" name="phone" id="phone" placeholder="Введите номер телефона" required>
                     </div>
 
                     <div class="field padding-bottom--24">
