@@ -1246,6 +1246,7 @@ a.ssolink {
 }
 
 .present-rentData,
+.present-rentFor,
 .present-rentCars,
 .present-rentModels {
   background: #fff;
@@ -1271,7 +1272,12 @@ a.ssolink {
   z-index: 13;
 }
 
-:is(.present-rentData, .present-rentCars, .present-rentModels).active {
+:is(
+    .present-rentData,
+    .present-rentFor,
+    .present-rentCars,
+    .present-rentModels
+  ).active {
   right: 0;
   left: 0;
 }
@@ -1344,3 +1350,8 @@ a.ssolink {
 /* .field input{
   text-align: left;
 } */
+
+.month-item-name {
+  font-weight: 500;
+  text-transform: capitalize;
+}

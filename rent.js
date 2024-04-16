@@ -8,16 +8,20 @@ const tbarTitleRentData = document.querySelector('.present-rentData .tbar-title'
 const presentRentCars = document.querySelector('.present-rentCars')
 const presentCarModel = document.querySelector('.present-rentModels')
 
+const presentRentFor = document.querySelector('.present-rentFor')
+
 let serviceStatus = ''
 
 rent.addEventListener('click', () => {
     presentRent.classList.toggle('active')
-    serviceStatus = 'Арендовать'
+    serviceStatus = 'rent'
+    presentRent.querySelector('.tbar-title').textContent = "Что хотите арендовать?"
 })
 
 forrent.addEventListener('click', () => {
     presentRent.classList.toggle('active')
-    serviceStatus = 'Сдать под Аренду'
+    serviceStatus = 'rentFor'
+    presentRent.querySelector('.tbar-title').textContent = "Что хотите сдать под аренду?"
 })
 
 const rentServices = document.querySelectorAll('.servicesRent .item')
@@ -35,8 +39,15 @@ let rentCity = ''
 
 
 rentCities.forEach(el => {
+
     el.addEventListener('click', () => {
         rentCity = el.innerText
+
+        if (serviceStatus === "rentFor") {
+            presentRentFor.classList.toggle('active')
+            e.stopImmediatePropagation();
+        }
+
         if (rentService.id === 'cars') {
             tbarTitleRentData.textContent = 'Выберите машину'
             presentRentData.querySelector("[data-service='cars']").style.display = 'inline'
@@ -59,6 +70,14 @@ rentCities.forEach(el => {
         presentRentData.classList.toggle('active')
 
     })
+})
+
+const rentForForm = document.querySelector('#rentForForm')
+const username = document.querySelector('#name')
+const phoneFor = document.querySelector('#phoneFor')
+rentForForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    sendMessage()
 })
 
 const inputCarName = document.querySelector('#carName')
@@ -163,8 +182,7 @@ rentForm.addEventListener('submit', (e) => {
 })
 
 const phone = document.querySelector('#phone')
-const fromDate = document.querySelector('#fromDate')
-const toDate = document.querySelector('#toDate')
+const dateRange = document.querySelector('#dateRange')
 const gruzTextarea = document.querySelector('#gruzTextarea')
 const equipmentsTextarea = document.querySelector('#equipmentsTextarea')
 
@@ -176,29 +194,34 @@ const sendMessage = () => {
 
     let t
     let cid
-
     let text
+
     if (rentService.id === 'cars') {
-        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> ${serviceStatus} %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Марка машины:</b> ${inputCarName.value}%0A<b>Модель машины:</b> ${inputCarModel.value}%0A<b>От:</b> ${fromDate.value} %0A<b>До:</b> ${toDate.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
         t = "6435795574:AAHDuWdPQpcNI3yPekGjbV1GRPU7SRFw4Q4"
         cid = -4135021717
+
+        if (serviceStatus === 'rentFor') {
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name} %0A<b>Город:</b> ${rentCity}%0A<b>Имя:</b> ${username.value} %0A<b>Телефон:</b> ${phoneFor.value}`
+        } else {
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Марка машины:</b> ${inputCarName.value}%0A<b>Модель машины:</b> ${inputCarModel.value}%0A<b>Период Аренды:</b> ${dateRange.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        }
     }
 
     if (rentService.id === 'gruz') {
-        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> ${serviceStatus} %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${gruzTextarea.value}%0A<b>От:</b> ${fromDate.value} %0A<b>До:</b> ${toDate.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${gruzTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
         t = "7008339608:AAHqtjexxE5IIOPcWUmNIx0hew-Ujsow7tM"
         cid = -4144342640
     }
 
     if (rentService.id === 'equipments') {
-        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> ${serviceStatus} %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>От:</b> ${fromDate.value} %0A<b>До:</b> ${toDate.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
 
         t = "7052202621:AAF7zSQ8VyoHvezFID4nGzckl-ffSgxzrNU"
         cid = -4108676653
     }
 
     if (rentService.id === "otherServices") {
-        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> ${serviceStatus} %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>От:</b> ${fromDate.value} %0A<b>До:</b> ${toDate.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
 
 
         t = "6617014775:AAEGiauFSfXcmIw8u--oJTKbxelQf26tNpA"
@@ -226,7 +249,7 @@ const sendMessage = () => {
     //     modal.classList.toggle('active')
     // }, 3000)
 
-    // reset()
+    reset()
 }
 
 const reset = () => {
@@ -249,7 +272,7 @@ backFromRentData.addEventListener('click', () => {
     presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
     document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = false)
     document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
-    
+
     carModels = []
     carModelField.classList.toggle('hide')
 
@@ -263,4 +286,10 @@ backFromRentCars.addEventListener('click', () => {
 const backFromRentModels = document.querySelector('.present-rentModels .back')
 backFromRentModels.addEventListener('click', () => {
     presentCarModel.classList.toggle('active')
+})
+
+const backFromRentFor = document.querySelector('.present-rentFor .back')
+backFromRentFor.addEventListener('click', () => {
+    presentRentFor.classList.toggle('active')
+    document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
 })

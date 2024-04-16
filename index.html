@@ -24,12 +24,10 @@
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script defer src="swiper.js"></script>
 
-    <script defer src="
-    https://cdn.jsdelivr.net/npm/pickerjs@1.2.1/dist/picker.min.js
-    "></script>
-    <link href="https://cdn.jsdelivr.net/npm/pickerjs@1.2.1/dist/picker.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/plugins/ranges.js"></script>
 
-    <script defer src="picker.js"></script>
+    <script defer src="datepicker.js"></script>
 
     <link rel="stylesheet" href="style.css">
 
@@ -426,18 +424,19 @@
                     </div> -->
 
                     <div class="field padding-bottom--24">
-                        <label>От</label>
-                        <input id="fromDate" type="text" class="serviceInp form-control js-picker-from"
-                            placeholder="dd.mm.yyyyy, HH" />
+                        <label>Период аренды</label>
+                        <input id="dateRange" type="text" class="serviceInp form-control js-picker-from"
+                            placeholder="dd.mm.yyyyy - dd.mm.yyyyy" autocomplete="off"/>
                     </div>
-                    <div class="field padding-bottom--24">
-                        <label>До</label>
+                    <!-- <div class="field padding-bottom--24">
+                        <label>День сдачи</label>
                         <input id="toDate" type="text" class="serviceInp form-control js-picker-to"
                             placeholder="dd.mm.yyyyy, HH" />
-                    </div>
+                    </div> -->
                     <div class="field padding-bottom--24">
                         <label for="username">Телефон</label>
-                        <input class="serviceInp" type="tel" name="phone" id="phone" placeholder="Введите номер телефона" required>
+                        <input class="serviceInp" type="tel" name="phone" id="phone"
+                            placeholder="Введите номер телефона" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                     </div>
 
                     <div class="field padding-bottom--24">
@@ -477,6 +476,36 @@
 
             <div class="present-body">
                 <div class="listRent flex flex-col"> </div>
+            </div>
+        </div>
+
+        <div class="present-rentFor">
+            <div class="tbar">
+                <div class="tbar-title">
+                    Заполните форму
+                </div>
+                <button class="back">
+                    <span class="material-symbols-outlined back">arrow_back_ios</span>
+                </button>
+            </div>
+
+            <div class="present-body">
+                <form id="rentForForm" action="POST">
+                    <div class="field padding-bottom--24">
+                        <label for="username">Имя</label>
+                        <input class="serviceInp" type="text" name="username" placeholder="Введите имя" id="name" autocomplete="off"
+                            required>
+                    </div>
+
+                    <div class="field padding-bottom--24">
+                        <label for="username">Телефон</label>
+                        <input class="serviceInp" type="tel" name="phone" id="phoneFor" placeholder="Введите номер телефона" required>
+                    </div>
+
+                    <div class="field padding-bottom--24">
+                        <input type="submit" name="submit" value="Отправить">
+                    </div>
+                </form>
             </div>
         </div>
 
