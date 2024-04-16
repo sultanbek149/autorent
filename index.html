@@ -27,7 +27,6 @@
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/plugins/ranges.js"></script>
 
-    <script defer src="datepicker.js"></script>
 
     <link rel="stylesheet" href="style.css">
 
@@ -195,7 +194,7 @@
             </div>
         </div>
 
-        <div class="present">
+        <div class="present" data-present>
             <div class="tbar">
                 <button class="back">
                     <span class="material-symbols-outlined back">arrow_back_ios</span>
@@ -268,7 +267,7 @@
             </div>
         </div>
         <!-- RENT -->
-        <div class="present-rent">
+        <div class="present-rent" data-present>
             <div class="tbar">
                 <div class="tbar-title">
                     Что хотите арендовать?
@@ -299,7 +298,7 @@
                 </div>
             </div>
         </div>
-        <div class="present-city">
+        <div class="present-city" data-present>
             <div class="tbar">
                 <div class="tbar-title">
                     Выберите город
@@ -378,7 +377,7 @@
                 </div>
             </div>
         </div>
-        <div class="present-rentData">
+        <div class="present-rentData" data-present>
             <div class="tbar">
                 <div class="tbar-title">
                     Выберите машину
@@ -416,6 +415,13 @@
                                 placeholder="Вертолет..."></textarea>
                         </div>
                     </span>
+                    <span data-service="otherServices">
+                        <div class="field padding-bottom--24">
+                            <label for="username">Опишите вашу услугу</label>
+                            <textarea class="serviceInp" name="equipments" id="otherServicesTextarea" cols="30" rows="3"
+                                placeholder="Электрогенератор..."></textarea>
+                        </div>
+                    </span>
 
                     <!-- 
                     <div class="field padding-bottom--24">
@@ -445,8 +451,7 @@
                 </form>
             </div>
         </div>
-
-        <div class="present-rentCars">
+        <div class="present-rentCars" data-present>
             <div class="tbar">
                 <div class="tbar-title">
                     Выберите марку машины
@@ -464,7 +469,7 @@
                 <div class="listRent flex flex-col"></div>
             </div>
         </div>
-        <div class="present-rentModels">
+        <div class="present-rentModels" data-present>
             <div class="tbar">
                 <div class="tbar-title">
                     Выберите модель машины
@@ -478,8 +483,7 @@
                 <div class="listRent flex flex-col"> </div>
             </div>
         </div>
-
-        <div class="present-rentFor">
+        <div class="present-rentFor" data-present>
             <div class="tbar">
                 <div class="tbar-title">
                     Заполните форму
@@ -499,7 +503,7 @@
 
                     <div class="field padding-bottom--24">
                         <label for="username">Телефон</label>
-                        <input class="serviceInp" type="tel" name="phone" id="phoneFor" placeholder="Введите номер телефона" required>
+                        <input class="serviceInp" type="tel" name="phone" id="phoneFor" placeholder="Введите номер телефона" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                     </div>
 
                     <div class="field padding-bottom--24">

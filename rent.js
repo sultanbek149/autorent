@@ -40,37 +40,47 @@ let rentCity = ''
 
 rentCities.forEach(el => {
 
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (e) => {
         rentCity = el.innerText
 
         if (serviceStatus === "rentFor") {
             presentRentFor.classList.toggle('active')
-            e.stopImmediatePropagation();
-        }
+        } else {
 
-        if (rentService.id === 'cars') {
-            tbarTitleRentData.textContent = 'Выберите машину'
-            presentRentData.querySelector("[data-service='cars']").style.display = 'inline'
-            document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
+            if (rentService.id === 'cars') {
+                tbarTitleRentData.textContent = 'Выберите машину'
+                presentRentData.querySelector("[data-service='cars']").style.display = 'inline'
+                document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
+            }
+            if (rentService.id === 'gruz') {
+                tbarTitleRentData.textContent = 'Грузовые и Спецтехника'
+                presentRentData.querySelector("[data-service='gruz']").style.display = 'inline'
+                document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
+            }
+            if (rentService.id === 'equipments') {
+                tbarTitleRentData.textContent = 'Оборудование и инструменты'
+                presentRentData.querySelector("[data-service='equipments']").style.display = 'inline'
+                document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
+            }
+            if (rentService.id === 'otherServices') {
+                tbarTitleRentData.textContent = 'Услуги'
+                presentRentData.querySelector("[data-service='otherServices']").style.display = 'inline'
+            }
+            presentRentData.classList.toggle('active')
+
         }
-        if (rentService.id === 'gruz') {
-            tbarTitleRentData.textContent = 'Грузовые и Спецтехника'
-            presentRentData.querySelector("[data-service='gruz']").style.display = 'inline'
-            document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
-        }
-        if (rentService.id === 'equipments') {
-            tbarTitleRentData.textContent = 'Оборудование и инструменты'
-            presentRentData.querySelector("[data-service='equipments']").style.display = 'inline'
-            document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = true)
-        }
-        if (rentService.id === 'otherServices') {
-            tbarTitleRentData.textContent = 'Услуги'
-            // presentRentData.querySelector("[data-service='otherServices']").style.display = 'inline'
-        }
-        presentRentData.classList.toggle('active')
 
     })
 })
+
+const picker = new Litepicker({
+    element: document.querySelector('#dateRange'),
+    singleMode: false,
+    delimiter: "  -  ",
+    format: "DD.MM.YYYY",
+    lang: "ru-RU",
+    minDate: new Date() - 1
+});
 
 const rentForForm = document.querySelector('#rentForForm')
 const username = document.querySelector('#name')
@@ -185,6 +195,10 @@ const phone = document.querySelector('#phone')
 const dateRange = document.querySelector('#dateRange')
 const gruzTextarea = document.querySelector('#gruzTextarea')
 const equipmentsTextarea = document.querySelector('#equipmentsTextarea')
+const otherServicesTextarea = document.querySelector('#otherServicesTextarea')
+const modal = document.querySelector('#open-modal')
+
+
 
 const sendMessage = () => {
 
@@ -208,25 +222,40 @@ const sendMessage = () => {
     }
 
     if (rentService.id === 'gruz') {
-        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${gruzTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
         t = "7008339608:AAHqtjexxE5IIOPcWUmNIx0hew-Ujsow7tM"
         cid = -4144342640
+
+        if (serviceStatus === 'rentFor') {
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phoneFor.value}`
+        } else {
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${gruzTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        }
     }
 
     if (rentService.id === 'equipments') {
-        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
-
         t = "7052202621:AAF7zSQ8VyoHvezFID4nGzckl-ffSgxzrNU"
         cid = -4108676653
+
+        if (serviceStatus === 'rentFor') {
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phoneFor.value}`
+        } else {
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        }
     }
 
     if (rentService.id === "otherServices") {
-        text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
-
-
         t = "6617014775:AAEGiauFSfXcmIw8u--oJTKbxelQf26tNpA"
         cid = -4123367316
+
+        if (serviceStatus === 'rentFor') {
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phoneFor.value}`
+        } else {
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${otherServicesTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+        }
     }
+
+    picker.clearSelection()
+
 
     console.log(text);
 
@@ -243,13 +272,15 @@ const sendMessage = () => {
     xhr.open("GET", url, true);
     xhr.send();
 
-    // modal.classList.toggle('active')
+    modal.classList.toggle('active')
 
-    // setTimeout(() => {
-    //     modal.classList.toggle('active')
-    // }, 3000)
+    setTimeout(() => {
+        modal.classList.toggle('active')
+    }, 3000)
 
     reset()
+
+    document.querySelectorAll('[data-present]').forEach(el => el.classList.remove('active'))
 }
 
 const reset = () => {
