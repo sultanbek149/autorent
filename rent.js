@@ -7,6 +7,7 @@ const presentRentData = document.querySelector('.present-rentData')
 const tbarTitleRentData = document.querySelector('.present-rentData .tbar-title')
 const presentRentCars = document.querySelector('.present-rentCars')
 const presentCarModel = document.querySelector('.present-rentModels')
+const presentOtherServices = document.querySelector('.present-otherServices')
 
 const presentRentFor = document.querySelector('.present-rentFor')
 
@@ -40,13 +41,12 @@ let rentCity = ''
 
 rentCities.forEach(el => {
 
-    el.addEventListener('click', (e) => {
+    el.addEventListener('click', () => {
         rentCity = el.innerText
 
         if (serviceStatus === "rentFor") {
             presentRentFor.classList.toggle('active')
         } else {
-
             if (rentService.id === 'cars') {
                 tbarTitleRentData.textContent = 'Выберите машину'
                 presentRentData.querySelector("[data-service='cars']").style.display = 'inline'
@@ -185,6 +185,19 @@ inputCarModel.addEventListener('click', () => {
         });
 })
 
+const inputOtherService = document.querySelector('#otherServicesInput')
+const itemsOtherServices = document.querySelectorAll('[data-otherService]')
+inputOtherService.addEventListener('click', () => {
+    presentOtherServices.classList.add('active')
+})
+
+itemsOtherServices.forEach(item => {
+    item.addEventListener('click', () => {
+        inputOtherService.value = item.querySelector('span').textContent
+        backFromOtherServices.click()
+    })
+})
+
 const rentForm = document.querySelector('#rentForm')
 rentForm.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -195,7 +208,6 @@ const phone = document.querySelector('#phone')
 const dateRange = document.querySelector('#dateRange')
 const gruzTextarea = document.querySelector('#gruzTextarea')
 const equipmentsTextarea = document.querySelector('#equipmentsTextarea')
-const otherServicesTextarea = document.querySelector('#otherServicesTextarea')
 const modal = document.querySelector('#open-modal')
 
 
@@ -250,7 +262,7 @@ const sendMessage = () => {
         if (serviceStatus === 'rentFor') {
             text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phoneFor.value}`
         } else {
-            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${otherServicesTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${inputOtherService.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
         }
     }
 
@@ -323,4 +335,9 @@ const backFromRentFor = document.querySelector('.present-rentFor .back')
 backFromRentFor.addEventListener('click', () => {
     presentRentFor.classList.toggle('active')
     document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
+})
+
+const backFromOtherServices = document.querySelector('.present-otherServices .back')
+backFromOtherServices.addEventListener('click', () => {
+    presentOtherServices.classList.toggle('active')
 })

@@ -1245,9 +1245,14 @@ a.ssolink {
   border-bottom: 2px solid rgba(19, 19, 19, 0.1);
 }
 
+.present-otherServices .present-body .flex {
+  gap: 10px;
+}
+
 .present-rentData,
 .present-rentFor,
 .present-rentCars,
+.present-otherServices,
 .present-rentModels {
   background: #fff;
   position: fixed;
@@ -1268,7 +1273,7 @@ a.ssolink {
   transition: all 200ms ease-in-out;
 }
 
-:is(.present-rentCars, .present-rentModels) {
+:is(.present-rentCars, .present-rentModels, .present-otherServices) {
   z-index: 13;
 }
 
@@ -1276,7 +1281,8 @@ a.ssolink {
     .present-rentData,
     .present-rentFor,
     .present-rentCars,
-    .present-rentModels
+    .present-rentModels,
+    .present-otherServices
   ).active {
   right: 0;
   left: 0;

@@ -194,78 +194,6 @@
             </div>
         </div>
 
-        <div class="present" data-present>
-            <div class="tbar">
-                <button class="back">
-                    <span class="material-symbols-outlined back">arrow_back_ios</span>
-                </button>
-
-                <div class="tbar-title">
-                    Выберите услуги
-                </div>
-            </div>
-
-            <div class="present-body">
-                <div class="flex flex-col">
-                    <div class="item" data-service>
-                        <img src="service1.png" alt="service">
-                        <span class="service">Встреча/проводы</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="driving.png" alt="service">
-                        <span class="service">Выезд за город</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="https://www.svgrepo.com/show/74601/security.svg" alt="service">
-                        <span class="service">Охрана</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="guide.png" alt="service">
-                        <span class="service">Гид</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="vagon.png" alt="service">
-                        <span class="service">Вагон</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="cortej.png" alt="service">
-                        <span class="service">Кортедж</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="obr.png" alt="service">
-                        <span class="service">Оборудование</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="driver.jpg" alt="service">
-                        <span class="service">Водитель</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="commercial.png" alt="service">
-                        <span class="service">Коммерческие</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="transportation.png" alt="service">
-                        <span class="service">Пассажирские перевозки</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="generator.png" alt="service">
-                        <span class="service">Генератор</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="manipulator.png" alt="service">
-                        <span class="service">Манипулятор</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="pogruz.png" alt="service">
-                        <span class="service">Вилочный погрузчик</span>
-                    </div>
-                    <div class="item" data-service>
-                        <img src="evacuator.png" alt="service">
-                        <span class="service">Эвакуатор</span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- RENT -->
         <div class="present-rent" data-present>
             <div class="tbar">
@@ -417,9 +345,9 @@
                     </span>
                     <span data-service="otherServices">
                         <div class="field padding-bottom--24">
-                            <label for="username">Опишите вашу услугу</label>
-                            <textarea class="serviceInp" name="equipments" id="otherServicesTextarea" cols="30" rows="3"
-                                placeholder="Электрогенератор..."></textarea>
+                            <label for="username">Вид услуги</label>
+                            <input class="serviceInp" type="text" name="username" placeholder="Выберите услугу" id="otherServicesInput" autocomplete="off" required>
+                            
                         </div>
                     </span>
 
@@ -432,7 +360,7 @@
                     <div class="field padding-bottom--24">
                         <label>Период аренды</label>
                         <input id="dateRange" type="text" class="serviceInp form-control js-picker-from"
-                            placeholder="dd.mm.yyyyy - dd.mm.yyyyy" autocomplete="off"/>
+                            placeholder="dd.mm.yyyyy - dd.mm.yyyyy" autocomplete="off" required/>
                     </div>
                     <!-- <div class="field padding-bottom--24">
                         <label>День сдачи</label>
@@ -442,7 +370,8 @@
                     <div class="field padding-bottom--24">
                         <label for="username">Телефон</label>
                         <input class="serviceInp" type="tel" name="phone" id="phone"
-                            placeholder="Введите номер телефона" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                            placeholder="Введите номер телефона" required
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                     </div>
 
                     <div class="field padding-bottom--24">
@@ -497,13 +426,15 @@
                 <form id="rentForForm" action="POST">
                     <div class="field padding-bottom--24">
                         <label for="username">Имя</label>
-                        <input class="serviceInp" type="text" name="username" placeholder="Введите имя" id="name" autocomplete="off"
-                            required>
+                        <input class="serviceInp" type="text" name="username" placeholder="Введите имя" id="name"
+                            autocomplete="off" required>
                     </div>
 
                     <div class="field padding-bottom--24">
                         <label for="username">Телефон</label>
-                        <input class="serviceInp" type="tel" name="phone" id="phoneFor" placeholder="Введите номер телефона" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        <input class="serviceInp" type="tel" name="phone" id="phoneFor"
+                            placeholder="Введите номер телефона" required
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                     </div>
 
                     <div class="field padding-bottom--24">
@@ -513,6 +444,79 @@
             </div>
         </div>
 
+        <div class="present-otherServices" data-present>
+            <div class="tbar">
+                <button class="back">
+                    <span class="material-symbols-outlined back">arrow_back_ios</span>
+                </button>
+
+                <div class="tbar-title">
+                    Выберите услуги
+                </div>
+            </div>
+
+            <div class="present-body">
+                <div class="flex flex-col">
+                    <div class="item" data-otherService>
+                        <img src="service1.png" alt="service">
+                        <span class="service">Встреча/проводы</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="driving.png" alt="service">
+                        <span class="service">Выезд за город</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="https://www.svgrepo.com/show/74601/security.svg" alt="service">
+                        <span class="service">Охрана</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="guide.png" alt="service">
+                        <span class="service">Гид</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="vagon.png" alt="service">
+                        <span class="service">Вагон</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="cortej.png" alt="service">
+                        <span class="service">Кортедж</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="obr.png" alt="service">
+                        <span class="service">Оборудование</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="driver.jpg" alt="service">
+                        <span class="service">Водитель</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="commercial.png" alt="service">
+                        <span class="service">Коммерческие</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="transportation.png" alt="service">
+                        <span class="service">Пассажирские перевозки</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="generator.png" alt="service">
+                        <span class="service">Генератор</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="manipulator.png" alt="service">
+                        <span class="service">Манипулятор</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="pogruz.png" alt="service">
+                        <span class="service">Вилочный погрузчик</span>
+                    </div>
+                    <div class="item" data-otherService>
+                        <img src="evacuator.png" alt="service">
+                        <span class="service">Эвакуатор</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="overlay"></div>
 </body>
 
