@@ -75,7 +75,6 @@ rentCities.forEach(el => {
 
 const picker = new Litepicker({
     element: document.querySelector('#dateRange'),
-    singleMode: false,
     delimiter: "  -  ",
     format: "DD.MM.YYYY",
     lang: "ru-RU",
