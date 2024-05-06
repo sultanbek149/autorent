@@ -1361,3 +1361,7 @@ a.ssolink {
   font-weight: 500;
   text-transform: capitalize;
 }
+
+.btn-orange {
+  background-color: #FFA500;
+}

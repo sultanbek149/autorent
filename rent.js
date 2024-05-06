@@ -297,6 +297,12 @@ const sendMessage = () => {
 
 const reset = () => {
     document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
+    document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = false)
+    if (rentService.id === 'cars') {
+        carModelField.classList.toggle('hide')
+    }
+    presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
+
 }
 
 
