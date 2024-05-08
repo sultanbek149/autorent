@@ -1363,5 +1363,25 @@ a.ssolink {
 }
 
 .btn-orange {
-  background-color: #FFA500;
+  background-color: #ffa500;
+}
+
+.desktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+.banner--desk {
+  flex: 1;
+}
+
+.footer {
+  min-height: 100px;
+}
+
+.bg-black {
+  background-color: #000;
 }

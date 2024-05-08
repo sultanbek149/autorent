@@ -37,7 +37,17 @@
 </head>
 
 <body>
-    <div class="container min-h-[624px] h-full">
+    <div class="desktop">
+        <div class="banner--desk">
+            asdf
+        </div>
+
+        <div class="footer bg-black">
+            asdf
+        </div>
+    </div>
+
+    <div class="container min-h-[624px] h-full hide">
         <div class="header mx-auto">
             <div class="logo flex gap-2 items-center justify-center">
                 <img src="logo.png" class="full " alt="logo">
@@ -347,8 +357,9 @@
                     <span data-service="otherServices">
                         <div class="field padding-bottom--24">
                             <label for="username">Вид услуги</label>
-                            <input class="serviceInp" type="text" name="username" placeholder="Выберите услугу" id="otherServicesInput" autocomplete="off">
-                            
+                            <input class="serviceInp" type="text" name="username" placeholder="Выберите услугу"
+                                id="otherServicesInput" autocomplete="off">
+
                         </div>
                     </span>
 
@@ -359,9 +370,9 @@
                     </div> -->
 
                     <div class="field padding-bottom--24">
-                        <label>Период аренды</label>
+                        <label>День аренды</label>
                         <input id="dateRange" type="text" class="serviceInp form-control js-picker-from"
-                            placeholder="dd.mm.yyyyy" autocomplete="off" required/>
+                            placeholder="dd.mm.yyyyy" autocomplete="off" required />
                     </div>
                     <!-- <div class="field padding-bottom--24">
                         <label>День сдачи</label>
@@ -427,7 +438,8 @@
                 <form id="rentForForm" action="POST">
                     <div class="field padding-bottom--24">
                         <label for="username">Имя</label>
-                        <input class="serviceInp" type="text" name="username" placeholder="Введите имя" id="name" required>
+                        <input class="serviceInp" type="text" name="username" placeholder="Введите имя" id="name"
+                            required>
                     </div>
 
                     <div class="field padding-bottom--24">
@@ -443,7 +455,6 @@
                 </form>
             </div>
         </div>
-
         <div class="present-otherServices" data-present>
             <div class="tbar">
                 <button class="back">
@@ -516,8 +527,9 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="overlay"></div>
+    </div>
 </body>
 
 </html>
