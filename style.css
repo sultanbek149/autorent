@@ -1432,3 +1432,43 @@ h2 {
   bottom: 0;
   z-index: 1;
 }
+
+body {
+  position: relative;
+  max-height: 100vh;
+  overflow: hidden;
+}
+.desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.mobile {
+  position: absolute;
+}
+
+[data-present] {
+  z-index: 1001;
+}
+
+.modal-window {
+  z-index: 1001;
+}
+
+@media (max-width: 768px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    position: static;
+  }
+  body {
+    max-height: unset;
+    overflow: auto;
+  }
+}
