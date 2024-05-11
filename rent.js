@@ -1,6 +1,10 @@
 const rent = document.querySelector('#rent')
 const forrent = document.querySelector('#forrent')
 
+const rent2 = document.querySelector('#rent2')
+const forrent2 = document.querySelector('#forrent2')
+
+
 const presentRent = document.querySelector('.present-rent')
 const presentCity = document.querySelector('.present-city')
 const presentRentData = document.querySelector('.present-rentData')
@@ -19,7 +23,19 @@ rent.addEventListener('click', () => {
     presentRent.querySelector('.tbar-title').textContent = "Что хотите арендовать?"
 })
 
+rent2.addEventListener('click', () => {
+    presentRent.classList.toggle('active')
+    serviceStatus = 'rent'
+    presentRent.querySelector('.tbar-title').textContent = "Что хотите арендовать?"
+})
+
 forrent.addEventListener('click', () => {
+    presentRent.classList.toggle('active')
+    serviceStatus = 'rentFor'
+    presentRent.querySelector('.tbar-title').textContent = "Что хотите сдать под аренду?"
+})
+
+forrent2.addEventListener('click', () => {
     presentRent.classList.toggle('active')
     serviceStatus = 'rentFor'
     presentRent.querySelector('.tbar-title').textContent = "Что хотите сдать под аренду?"
@@ -346,3 +362,4 @@ const backFromOtherServices = document.querySelector('.present-otherServices .ba
 backFromOtherServices.addEventListener('click', () => {
     presentOtherServices.classList.toggle('active')
 })
+

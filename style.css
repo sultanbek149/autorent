@@ -1447,16 +1447,16 @@ body {
   z-index: 1000;
 }
 
-.mobile {
+/* .mobile {
   position: absolute;
-}
+} */
 
 [data-present] {
-  z-index: 1001;
+  z-index: 1003;
 }
 
 .modal-window {
-  z-index: 1001;
+  z-index: 1003;
 }
 
 @media (max-width: 768px) {
