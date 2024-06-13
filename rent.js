@@ -160,11 +160,14 @@ inputSearchCar.addEventListener('input', e => {
     })
 })
 
+const inputSearchCarModel = document.querySelector('#searchCarModel')
 
 let carModels = []
 const inputCarModel = document.querySelector('#carModel')
 inputCarModel.addEventListener('click', () => {
     presentCarModel.classList.toggle('active')
+    inputSearchCarModel.value = ""
+    carModels.forEach(carModel => carModel.element.classList.remove('hide'))
 
     const url = `https://cars-base.ru/api/cars/${carId}`;
     const listRent = document.querySelector('.present-rentModels .listRent')
@@ -176,28 +179,38 @@ inputCarModel.addEventListener('click', () => {
         .then(data => {
             // Processing the fetched data
             console.log(data)
-            carModels = data
-            carModels.forEach(el => {
+            carModels = data.map(el => {
                 const listItem = document.createElement('div');
                 listItem.classList.add('item')
 
                 const span = document.createElement('span');
-                span.textContent = el.name
+                span.textContent = el.id
 
                 listItem.appendChild(span);
                 listRent.appendChild(listItem)
 
                 listItem.addEventListener('click', () => {
+                    // carModelId = el.id
                     backFromRentModels.click()
                     inputCarModel.value = el.name
                 })
 
+                return { name: el.name, id: el.id, element: listItem }
             })
+            
         })
         .catch(error => {
             // Handling errors
             console.error('Error fetching data:', error);
         });
+})
+
+inputSearchCarModel.addEventListener('input', e => {
+    const value = e.target.value.toLowerCase()
+    carModels.forEach(carModel => {
+        let isVisible = carModel.name.toLowerCase().includes(value)
+        carModel.element.classList.toggle('hide', !isVisible)
+    })
 })
 
 const inputOtherService = document.querySelector('#otherServicesInput')
