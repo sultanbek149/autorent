@@ -103,6 +103,7 @@ const phoneFor = document.querySelector('#phoneFor')
 rentForForm.addEventListener('submit', (e) => {
     e.preventDefault()
     sendMessage()
+    window.location.href = "thanks.html";
 })
 
 const inputCarName = document.querySelector('#carName')
@@ -132,6 +133,8 @@ fetch(url)
                 inputCarName.value = el.name
                 if (carModelField) carModelField.classList.remove('hide')
                 backFromRentCars.click()
+                // inputCarModel.focus()
+                // inputCarModel.select()
             })
 
             return { name: el.name, id: el.id, element: listItem }
@@ -149,6 +152,8 @@ inputCarName.addEventListener('click', () => {
     presentRentCars.classList.toggle('active')
     inputCarModel.value = ""
     inputSearchCar.value = ""
+    inputSearchCar.focus()
+    inputSearchCar.select()
     cars.forEach(car => car.element.classList.remove('hide'))
 })
 
@@ -167,6 +172,8 @@ const inputCarModel = document.querySelector('#carModel')
 inputCarModel.addEventListener('click', () => {
     presentCarModel.classList.toggle('active')
     inputSearchCarModel.value = ""
+    inputSearchCarModel.focus()
+    inputSearchCarModel.select()    
     carModels.forEach(carModel => carModel.element.classList.remove('hide'))
 
     const url = `https://cars-base.ru/api/cars/${carId}`;
@@ -193,6 +200,8 @@ inputCarModel.addEventListener('click', () => {
                     // carModelId = el.id
                     backFromRentModels.click()
                     inputCarModel.value = el.name
+                    dateRange.focus()
+                    dateRange.select()
                 })
 
                 return { name: el.name, id: el.id, element: listItem }
@@ -230,6 +239,7 @@ const rentForm = document.querySelector('#rentForm')
 rentForm.addEventListener('submit', (e) => {
     e.preventDefault()
     sendMessage()
+    window.location.href = "thanks.html";
 })
 
 const phone = document.querySelector('#phone')
