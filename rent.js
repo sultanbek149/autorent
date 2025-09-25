@@ -17,6 +17,7 @@ const presentRentFor = document.querySelector('.present-rentFor')
 
 let serviceStatus = ''
 
+
 rent.addEventListener('click', () => {
     presentRent.classList.toggle('active')
     serviceStatus = 'rent'
@@ -40,6 +41,8 @@ forrent2.addEventListener('click', () => {
     serviceStatus = 'rentFor'
     presentRent.querySelector('.tbar-title').textContent = "Что хотите сдать под аренду?"
 })
+
+
 
 const rentServices = document.querySelectorAll('.servicesRent .item')
 let rentService = {}
@@ -102,7 +105,7 @@ const username = document.querySelector('#name')
 const phoneFor = document.querySelector('#phoneFor')
 rentForForm.addEventListener('submit', (e) => {
     e.preventDefault()
-    sendMessage()
+    sendMessageToGoogleSheets('rentFor')
     window.location.href = "thanks.html";
 })
 
@@ -173,7 +176,7 @@ inputCarModel.addEventListener('click', () => {
     presentCarModel.classList.toggle('active')
     inputSearchCarModel.value = ""
     inputSearchCarModel.focus()
-    inputSearchCarModel.select()    
+    inputSearchCarModel.select()
     carModels.forEach(carModel => carModel.element.classList.remove('hide'))
 
     const url = `https://cars-base.ru/api/cars/${carId}`;
@@ -206,7 +209,7 @@ inputCarModel.addEventListener('click', () => {
 
                 return { name: el.name, id: el.id, element: listItem }
             })
-            
+
         })
         .catch(error => {
             // Handling errors
@@ -237,9 +240,9 @@ itemsOtherServices.forEach(item => {
 
 const rentForm = document.querySelector('#rentForm')
 rentForm.addEventListener('submit', (e) => {
+    // sendMessage()
     e.preventDefault()
-    sendMessage()
-    window.location.href = "thanks.html";
+    sendMessageToGoogleSheets('rent')
 })
 
 const phone = document.querySelector('#phone')
@@ -249,6 +252,75 @@ const equipmentsTextarea = document.querySelector('#equipmentsTextarea')
 const modal = document.querySelector('#open-modal')
 
 
+const sendMessageToGoogleSheets = async (status = 'rent') => {
+    const date = new Date();
+
+    let inputValue = {};
+
+    if (status === 'rent') {
+        inputValue = {
+            carName: inputCarName.value,
+            carModel: inputCarModel.value,
+            dateRange: dateRange.value,
+            phone: phone.value,
+            cityRent: rentCity,
+            rentService: rentService.name,
+            gruzTextarea: gruzTextarea.value,
+            equipmentsTextarea: equipmentsTextarea.value,
+            inputOtherService: inputOtherService.value,
+            createdAt: date.toLocaleString(),
+            targetSheet: 'Sheet1' // 👈 goes to Sheet1
+        };
+    }
+    if (status === 'rentFor') {
+        inputValue = {
+            rentService: rentService.name,
+            cityRent: rentCity,
+            username: username.value,
+            phone: phoneFor.value,
+            createdAt: date.toLocaleString(),
+            targetSheet: 'Sheet2' // 👈 goes to Sheet2
+        };
+    }
+
+    console.log(inputValue)
+    const baseURL = 'https://script.google.com/macros/s/AKfycbwy3sgx97-mDDTnWQ240jwSezwzekZZ489v-dhBk1xfd5mx0kVxDx5kJLyVkAChPXGgtQ/exec'
+
+    const formData = new FormData()
+    Object.keys(inputValue).forEach((key) => {
+        formData.append(key, inputValue[key])
+    })
+
+    try {
+        const res = await fetch(baseURL, {
+            method: 'POST',
+            body: formData,
+        })
+        if (res.ok) {
+            console.log('Request was successful:', res);
+        } else {
+            console.log('Request Failed:', res);
+        }
+
+    } catch (e) {
+        console.error('Error during fetch:', e);
+    }
+
+    picker.clearSelection()
+
+
+    modal.classList.toggle('active')
+
+    setTimeout(() => {
+        modal.classList.toggle('active')
+    }, 3000)
+
+    reset()
+
+    document.querySelectorAll('[data-present]').forEach(el => el.classList.remove('active'))
+
+    window.location.href = "thanks.html";
+}
 
 const sendMessage = () => {
 
@@ -385,4 +457,3 @@ const backFromOtherServices = document.querySelector('.present-otherServices .ba
 backFromOtherServices.addEventListener('click', () => {
     presentOtherServices.classList.toggle('active')
 })
-
