@@ -106,7 +106,19 @@ const phoneFor = document.querySelector('#phoneFor')
 rentForForm.addEventListener('submit', (e) => {
     e.preventDefault()
     sendMessageToGoogleSheets('rentFor')
+
+    modal.classList.toggle('active')
+
+    setTimeout(() => {
+        modal.classList.toggle('active')
+    }, 3000)
+
+    reset()
+
+    document.querySelectorAll('[data-present]').forEach(el => el.classList.remove('active'))
+
     window.location.href = "thanks.html";
+
 })
 
 const inputCarName = document.querySelector('#carName')
@@ -243,6 +255,22 @@ rentForm.addEventListener('submit', (e) => {
     // sendMessage()
     e.preventDefault()
     sendMessageToGoogleSheets('rent')
+
+    picker.clearSelection()
+
+
+    modal.classList.toggle('active')
+
+    setTimeout(() => {
+        modal.classList.toggle('active')
+    }, 3000)
+
+    reset()
+
+    document.querySelectorAll('[data-present]').forEach(el => el.classList.remove('active'))
+
+    window.location.href = "thanks.html";
+
 })
 
 const phone = document.querySelector('#phone')
@@ -305,21 +333,6 @@ const sendMessageToGoogleSheets = async (status = 'rent') => {
     } catch (e) {
         console.error('Error during fetch:', e);
     }
-
-    picker.clearSelection()
-
-
-    modal.classList.toggle('active')
-
-    setTimeout(() => {
-        modal.classList.toggle('active')
-    }, 3000)
-
-    reset()
-
-    document.querySelectorAll('[data-present]').forEach(el => el.classList.remove('active'))
-
-    window.location.href = "thanks.html";
 }
 
 const sendMessage = () => {
