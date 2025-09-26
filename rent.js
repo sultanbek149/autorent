@@ -17,6 +17,9 @@ const presentRentFor = document.querySelector('.present-rentFor')
 
 let serviceStatus = ''
 
+// Флаг для предотвращения повторной отправки
+let isSubmitting = false
+
 
 rent.addEventListener('click', () => {
     presentRent.classList.toggle('active')
@@ -105,10 +108,12 @@ const username = document.querySelector('#name')
 const phoneFor = document.querySelector('#phoneFor')
 rentForForm.addEventListener('submit', async (e) => {
     e.preventDefault()
+    if (isSubmitting) return
+    isSubmitting = true
     await sendMessageToGoogleSheets('rentFor')
 
     // Отправка в Telegram
-    sendMessage()
+    await sendMessage()
 
     modal.classList.toggle('active')
 
@@ -121,6 +126,7 @@ rentForForm.addEventListener('submit', async (e) => {
     document.querySelectorAll('[data-present]').forEach(el => el.classList.remove('active'))
 
     window.location.href = "thanks.html";
+    isSubmitting = false
 
 })
 
@@ -257,10 +263,12 @@ const rentForm = document.querySelector('#rentForm')
 rentForm.addEventListener('submit', async (e) => {
     // sendMessage()
     e.preventDefault()
+    if (isSubmitting) return
+    isSubmitting = true
     await sendMessageToGoogleSheets('rent')
 
     // Отправка в Telegram
-    sendMessage()
+    await sendMessage()
 
     picker.clearSelection()
 
@@ -276,6 +284,7 @@ rentForm.addEventListener('submit', async (e) => {
     document.querySelectorAll('[data-present]').forEach(el => el.classList.remove('active'))
 
     window.location.href = "thanks.html";
+    isSubmitting = false
 
 })
 
@@ -342,7 +351,7 @@ const sendMessageToGoogleSheets = async (status = 'rent') => {
     }
 }
 
-const sendMessage = () => {
+const sendMessage = async () => {
 
     // const t = "6569603838:AAF_gfsCWK5fughj7bevQswTyn4ruxq1t8g"
     // const cid = -1002112977648
@@ -359,7 +368,7 @@ const sendMessage = () => {
         if (serviceStatus === 'rentFor') {
             text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name} %0A<b>Город:</b> ${rentCity}%0A<b>Имя:</b> ${username.value} %0A<b>Телефон:</b> ${phoneFor.value}`
         } else {
-            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Марка машины:</b> ${inputCarName.value}%0A<b>Модель машины:</b> ${inputCarModel.value}%0A<b>Период Аренды:</b> ${dateRange.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Марка машины:</b> ${inputCarName.value}%0A<b>Модель машины:</b> ${inputCarModel.value}%0A<b>Период Аренды:</б> ${dateRange.value} %0A<b>Город:</б> ${rentCity}%0A<b>Телефон:</б> ${phone.value}`
         }
     }
 
@@ -368,9 +377,9 @@ const sendMessage = () => {
         cid = -4144342640
 
         if (serviceStatus === 'rentFor') {
-            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phoneFor.value}`
+            text = `<b>Данные с сайта:</b> %0A<b>Статус:</б> Cдать под Аренду %0A<b>Вид услуги:</б> ${rentService.name}%0A<b>Город:</б> ${rentCity}%0A<b>Телефон:</б> ${phoneFor.value}`
         } else {
-            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${gruzTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value} %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+            text = `<b>Данные с сайта:</б> %0A<b>Статус:</б> Арендовать %0A<b>Вид услуги:</б> ${rentService.name}%0A<b>Описание услуги:</б> ${gruzTextarea.value}%0A<b>Период Аренды:</б> ${dateRange.value} %0A<b>Город:</б> ${rentCity}%0A<b>Телефон:</б> ${phone.value}`
         }
     }
 
@@ -379,20 +388,20 @@ const sendMessage = () => {
         cid = -4108676653
 
         if (serviceStatus === 'rentFor') {
-            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phoneFor.value}`
+            text = `<b>Данные с сайта:</б> %0A<b>Статус:</б> Cдать под Аренду %0A<b>Вид услуги:</б> ${rentService.name}%0A<b>Город:</б> ${rentCity}%0A<b>Телефон:</б> ${phoneFor.value}`
         } else {
-            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${equipmentsTextarea.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+            text = `<b>Данные с сайта:</б> %0A<b>Статус:</б> Арендовать %0A<b>Вид услуги:</б> ${rentService.name}%0A<b>Описание услуги:</б> ${equipmentsTextarea.value}%0A<b>Период Аренды:</б> ${dateRange.value}  %0A<b>Город:</б> ${rentCity}%0A<b>Телефон:</б> ${phone.value}`
         }
     }
 
-    if (rentService.id === "otherServices") {
-        t = "6617014775:AAEGiauFSfXcmIw8u--oJTKbxelQf26tNpA"
+    if (rentService.id === \"otherServices\") {
+        t = \"6617014775:AAEGiauFSfXcmIw8u--oJTKbxelQf26tNpA\"
         cid = -4123367316
 
         if (serviceStatus === 'rentFor') {
-            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Cдать под Аренду %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phoneFor.value}`
+            text = `<b>Данные с сайта:</б> %0A<b>Статус:</б> Cдать под Аренду %0A<b>Вид услуги:</б> ${rentService.name}%0A<b>Город:</б> ${rentCity}%0A<b>Телефон:</б> ${phoneFor.value}`
         } else {
-            text = `<b>Данные с сайта:</b> %0A<b>Статус:</b> Арендовать %0A<b>Вид услуги:</b> ${rentService.name}%0A<b>Описание услуги:</b> ${inputOtherService.value}%0A<b>Период Аренды:</b> ${dateRange.value}  %0A<b>Город:</b> ${rentCity}%0A<b>Телефон:</b> ${phone.value}`
+            text = `<b>Данные с сайта:</б> %0A<b>Статус:</б> Арендовать %0A<b>Вид услуги:</б> ${rentService.name}%0A<b>Описание услуги:</б> ${inputOtherService.value}%0A<b>Период Аренды:</б> ${dateRange.value}  %0A<b>Город:</б> ${rentCity}%0A<b>Телефон:</б> ${phone.value}`
         }
     }
 
@@ -404,25 +413,22 @@ const sendMessage = () => {
 
     const url = `https://api.telegram.org/bot${t}/sendMessage?chat_id=${cid}&text=${text}&parse_mode=html`
 
-    const xhr = new XMLHttpRequest();
+    if (!window.navigator.onLine) return alert(\"Прошу проверьте свое интернет соединение!!!\")
 
-    // Handle the 'load' event for successful completion of the request    
-
-    if (!window.navigator.onLine) return alert("Прошу проверьте свое интернет соединение!!!")
-
-
-    xhr.open("GET", url, true);
-    xhr.send();
-
-    modal.classList.toggle('active')
-
-    setTimeout(() => {
-        modal.classList.toggle('active')
-    }, 3000)
-
-    reset()
-
-    document.querySelectorAll('[data-present]').forEach(el => el.classList.remove('active'))
+    await new Promise((resolve) => {
+        try {
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', () => resolve());
+            xhr.addEventListener('error', () => resolve());
+            xhr.addEventListener('abort', () => resolve());
+            xhr.open(\"GET\", url, true);
+            xhr.send();
+            // На iOS иногда helps подождать тик
+            setTimeout(() => resolve(), 1200);
+        } catch (_) {
+            resolve();
+        }
+    })
 }
 
 const reset = () => {
@@ -431,7 +437,7 @@ const reset = () => {
     if (rentService.id === 'cars') {
         carModelField.classList.toggle('hide')
     }
-    presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
+    presentRentData.querySelector(`[data-service=\"${rentService.id}\"]`).style.display = 'none'
 
 }
 
@@ -448,7 +454,7 @@ backFromRentCity.addEventListener('click', () => {
 const backFromRentData = document.querySelector('.present-rentData .back')
 backFromRentData.addEventListener('click', () => {
     presentRentData.classList.toggle('active')
-    presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
+    presentRentData.querySelector(`[data-service=\"${rentService.id}\"]`).style.display = 'none'
     document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = false)
     document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
 
