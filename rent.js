@@ -103,9 +103,9 @@ const picker = new Litepicker({
 const rentForForm = document.querySelector('#rentForForm')
 const username = document.querySelector('#name')
 const phoneFor = document.querySelector('#phoneFor')
-rentForForm.addEventListener('submit', (e) => {
+rentForForm.addEventListener('submit', async (e) => {
     e.preventDefault()
-    sendMessageToGoogleSheets('rentFor')
+    await sendMessageToGoogleSheets('rentFor')
 
     modal.classList.toggle('active')
 
@@ -251,10 +251,10 @@ itemsOtherServices.forEach(item => {
 })
 
 const rentForm = document.querySelector('#rentForm')
-rentForm.addEventListener('submit', (e) => {
+rentForm.addEventListener('submit', async (e) => {
     // sendMessage()
     e.preventDefault()
-    sendMessageToGoogleSheets('rent')
+    await sendMessageToGoogleSheets('rent')
 
     picker.clearSelection()
 
@@ -323,6 +323,7 @@ const sendMessageToGoogleSheets = async (status = 'rent') => {
         const res = await fetch(baseURL, {
             method: 'POST',
             body: formData,
+            keepalive: true,
         })
         if (res.ok) {
             console.log('Request was successful:', res);
@@ -424,7 +425,7 @@ const reset = () => {
     if (rentService.id === 'cars') {
         carModelField.classList.toggle('hide')
     }
-    presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
+    presentRentData.querySelector(`[data-service=\"${rentService.id}\"]`).style.display = 'none'
 
 }
 
@@ -441,7 +442,7 @@ backFromRentCity.addEventListener('click', () => {
 const backFromRentData = document.querySelector('.present-rentData .back')
 backFromRentData.addEventListener('click', () => {
     presentRentData.classList.toggle('active')
-    presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
+    presentRentData.querySelector(`[data-service=\"${rentService.id}\"]`).style.display = 'none'
     document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = false)
     document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
 
