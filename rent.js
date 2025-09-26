@@ -107,6 +107,9 @@ rentForForm.addEventListener('submit', async (e) => {
     e.preventDefault()
     await sendMessageToGoogleSheets('rentFor')
 
+    // Отправка в Telegram
+    sendMessage()
+
     modal.classList.toggle('active')
 
     setTimeout(() => {
@@ -255,6 +258,9 @@ rentForm.addEventListener('submit', async (e) => {
     // sendMessage()
     e.preventDefault()
     await sendMessageToGoogleSheets('rent')
+
+    // Отправка в Telegram
+    sendMessage()
 
     picker.clearSelection()
 
@@ -425,7 +431,7 @@ const reset = () => {
     if (rentService.id === 'cars') {
         carModelField.classList.toggle('hide')
     }
-    presentRentData.querySelector(`[data-service=\"${rentService.id}\"]`).style.display = 'none'
+    presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
 
 }
 
@@ -442,7 +448,7 @@ backFromRentCity.addEventListener('click', () => {
 const backFromRentData = document.querySelector('.present-rentData .back')
 backFromRentData.addEventListener('click', () => {
     presentRentData.classList.toggle('active')
-    presentRentData.querySelector(`[data-service=\"${rentService.id}\"]`).style.display = 'none'
+    presentRentData.querySelector(`[data-service="${rentService.id}"]`).style.display = 'none'
     document.querySelectorAll(`[data-service=${rentService.id}] .serviceInp`).forEach(el => el.required = false)
     document.querySelectorAll('.serviceInp').forEach(el => el.value = '')
 
