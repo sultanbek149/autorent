@@ -34,6 +34,31 @@
     <!-- <script defer src="app.js"></script> -->
     <script defer src="rent.js"></script>
     <title>AUTOPRO</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17619461382"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-17619461382');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104362387', 'ym');
+
+        ym(104362387, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/104362387" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
 </head>
 
 <body>
@@ -121,7 +146,7 @@
                 <div class="swiper-slide">
                     <div class="banner relative rounded-[10px] overflow-hidden">
                         <div class="pb-[78%]"></div>
-                        <div style="--bg-img: url('https://images.unsplash.com/photo-1563561686990-f0ef5b3e0b7c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
+                        <div style="--bg-img: url('https://images.unsplash.com/photo-1612442377759-b56787227b1b?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
                             class="banner__img absolute inset-0">
                         </div>
                         <div class="banner__content absolute inset-0 overflow-hidden">
@@ -136,6 +161,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- https://images.unsplash.com/photo-1563561686990-f0ef5b3e0b7c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D -->
 
             <div class="swiper-pagination"></div>
         </div>
@@ -385,7 +412,7 @@
                     <span data-service="otherServices">
                         <div class="field padding-bottom--24">
                             <label for="username">Вид услуги</label>
-                            <input class="serviceInp" readonly  type="text" name="username" placeholder="Выберите услугу"
+                            <input class="serviceInp" readonly type="text" name="username" placeholder="Выберите услугу"
                                 id="otherServicesInput" autocomplete="off">
 
                         </div>
@@ -450,8 +477,8 @@
 
             <div class="present-body">
                 <div class="field padding-bottom--12">
-                    <input class="searchInp" type="search" name="username" id="searchCarModel" required placeholder="Поиск"
-                        autocomplete="off">
+                    <input class="searchInp" type="search" name="username" id="searchCarModel" required
+                        placeholder="Поиск" autocomplete="off">
                 </div>
                 <div class="listRent flex flex-col"> </div>
             </div>
